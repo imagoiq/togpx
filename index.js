@@ -47,17 +47,23 @@ function togpx( geojson, options ) {
   function get_feature_description(props) {
     // constructs a description for a given feature
     // uses a nested `tags` object or the feature's `properties` if present
-    // and then concatenates all properties to construct a description.
+    // and then searchs for the following properties to construct a type:
+    // `description`, `desc`
     if (!props) return "";
     if (typeof props.tags === "object")
       return get_feature_description(props.tags);
+    if (props.description)
+      return props.description;
+    if (props.desc)
+      return props.desc;
+    // if no description property available, concatenates all properties to construct a description.
     var res = "";
     for (var k in props) {
       if (typeof props[k] === "object")
         continue;
-      res += k+"="+props[k]+"\n";
+      res += k + "=" + props[k] + "\n";
     }
-    return res.substr(0,res.length-1);
+    return res.substr(0, res.length - 1);
   }
   function get_feature_coord_times(feature) {
     if (!feature.properties) return null;
