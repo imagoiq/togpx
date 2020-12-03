@@ -6,7 +6,7 @@ if (typeof require !== "undefined") {
 
 describe("geometries", function () {
 
-  it('blank FeatureCollection', function() {
+  it('blank FeatureCollection', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -21,14 +21,14 @@ describe("geometries", function () {
     expect(result.getElementsByTagName("rte")).to.have.length(0);
   });
 
-  it('Simple Feature', function() {
+  it('Simple Feature', function () {
     var geojson, result;
     geojson = {
       type: "Feature",
       properties: {},
       geometry: {
         type: "Point",
-        coordinates: [1.0,2.0]
+        coordinates: [1.0, 2.0]
       }
     };
     result = togpx(geojson);
@@ -41,11 +41,11 @@ describe("geometries", function () {
     expect(wpt.getAttribute("lon")).to.eql(1.0);
   });
 
-  it('Simple Geometry', function() {
+  it('Simple Geometry', function () {
     var geojson, result;
     geojson = {
       type: "Point",
-      coordinates: [1.0,2.0]
+      coordinates: [1.0, 2.0]
     };
     result = togpx(geojson);
     result = (new DOMParser()).parseFromString(result, 'text/xml');
@@ -57,7 +57,7 @@ describe("geometries", function () {
     expect(wpt.getAttribute("lon")).to.eql(1.0);
   });
 
-  it('Point', function() {
+  it('Point', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -66,7 +66,7 @@ describe("geometries", function () {
         properties: {},
         geometry: {
           type: "Point",
-          coordinates: [1.0,2.0]
+          coordinates: [1.0, 2.0]
         }
       }]
     };
@@ -80,7 +80,7 @@ describe("geometries", function () {
     expect(wpt.getAttribute("lon")).to.eql(1.0);
   });
 
-  it('MultiPoint', function() {
+  it('MultiPoint', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -89,7 +89,7 @@ describe("geometries", function () {
         properties: {},
         geometry: {
           type: "MultiPoint",
-          coordinates: [[1.0,2.0],[3.0,4.0]]
+          coordinates: [[1.0, 2.0], [3.0, 4.0]]
         }
       }]
     };
@@ -106,7 +106,7 @@ describe("geometries", function () {
     expect(wpt.getAttribute("lon")).to.eql(3.0);
   });
 
-  it('LineString', function() {
+  it('LineString', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -115,7 +115,7 @@ describe("geometries", function () {
         properties: {},
         geometry: {
           type: "LineString",
-          coordinates: [[1.0,2.0],[3.0,4.0]]
+          coordinates: [[1.0, 2.0], [3.0, 4.0]]
         }
       }]
     };
@@ -135,7 +135,7 @@ describe("geometries", function () {
     expect(trkpts[1].getAttribute("lon")).to.eql(3.0);
   });
 
-  it('MultiLineString', function() {
+  it('MultiLineString', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -144,7 +144,7 @@ describe("geometries", function () {
         properties: {},
         geometry: {
           type: "MultiLineString",
-          coordinates: [[[1.0,2.0],[3.0,4.0]],[[1.0,1.0],[2.0,2.0]]]
+          coordinates: [[[1.0, 2.0], [3.0, 4.0]], [[1.0, 1.0], [2.0, 2.0]]]
         }
       }]
     };
@@ -170,7 +170,7 @@ describe("geometries", function () {
     expect(trkpts[1].getAttribute("lon")).to.eql(2.0);
   });
 
-  it('Polygon (no holes)', function() {
+  it('Polygon (no holes)', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -180,7 +180,7 @@ describe("geometries", function () {
         geometry: {
           type: "Polygon",
           coordinates: [
-            [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]
+            [[100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0]]
           ]
         }
       }]
@@ -200,7 +200,7 @@ describe("geometries", function () {
     // skip remaining points, should be ok
   });
 
-  it('Polygon (with hole)', function() {
+  it('Polygon (with hole)', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -210,8 +210,8 @@ describe("geometries", function () {
         geometry: {
           type: "Polygon",
           coordinates: [
-            [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ],
-            [ [100.2, 0.2], [100.8, 0.2], [100.8, 0.8], [100.2, 0.8], [100.2, 0.2] ]
+            [[100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0]],
+            [[100.2, 0.2], [100.8, 0.2], [100.8, 0.8], [100.2, 0.8], [100.2, 0.2]]
           ]
         }
       }]
@@ -236,7 +236,7 @@ describe("geometries", function () {
     // skip remaining points, should be ok
   });
 
-  it('MultiPolygon', function() {
+  it('MultiPolygon', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -248,7 +248,7 @@ describe("geometries", function () {
           coordinates: [
             [[[102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0]]],
             [[[100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0]],
-             [[100.2, 0.2], [100.8, 0.2], [100.8, 0.8], [100.2, 0.8], [100.2, 0.2]]]
+            [[100.2, 0.2], [100.8, 0.2], [100.8, 0.8], [100.2, 0.8], [100.2, 0.2]]]
           ]
         }
       }]
@@ -278,7 +278,7 @@ describe("geometries", function () {
     // skip remaining points, should be ok
   });
 
-  it('GeometryCollection', function() {
+  it('GeometryCollection', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -288,12 +288,14 @@ describe("geometries", function () {
         geometry: {
           type: "GeometryCollection",
           geometries: [
-            { "type": "Point",
+            {
+              "type": "Point",
               "coordinates": [100.0, 0.0]
-              },
-            { "type": "LineString",
-              "coordinates": [ [101.0, 0.0], [102.0, 1.0] ]
-              }
+            },
+            {
+              "type": "LineString",
+              "coordinates": [[101.0, 0.0], [102.0, 1.0]]
+            }
           ]
         }
       }]
@@ -317,7 +319,7 @@ describe("geometries", function () {
     expect(trkpts[1].getAttribute("lon")).to.eql(102.0);
   });
 
-  it('ignore unknown', function() {
+  it('ignore unknown', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -330,7 +332,7 @@ describe("geometries", function () {
       }]
     };
     /**/ var _consoleLog = console.log;
-    /**/ console.log = function() {};
+    /**/ console.log = function () { };
     result = togpx(geojson);
     /**/ console.log = _consoleLog;
     result = (new DOMParser()).parseFromString(result, 'text/xml');
@@ -342,7 +344,7 @@ describe("geometries", function () {
 
 describe("properties", function () {
 
-  it('Name', function() {
+  it('Name', function () {
     var geojson, result, wpt;
     geojson = {
       type: "FeatureCollection",
@@ -352,7 +354,7 @@ describe("properties", function () {
         },
         geometry: {
           type: "Point",
-          coordinates: [0.0,0.0]
+          coordinates: [0.0, 0.0]
         }
       }]
     };
@@ -379,7 +381,7 @@ describe("properties", function () {
     expect(wpt.getElementsByTagName("name")[0].textContent).to.equal("name");
   });
 
-  it('Name (from tags)', function() {
+  it('Name (from tags)', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -391,7 +393,7 @@ describe("properties", function () {
         },
         geometry: {
           type: "Point",
-          coordinates: [0.0,0.0]
+          coordinates: [0.0, 0.0]
         }
       }]
     };
@@ -411,7 +413,7 @@ describe("properties", function () {
         },
         geometry: {
           type: "Point",
-          coordinates: [0.0,0.0]
+          coordinates: [0.0, 0.0]
         }
       }]
     };
@@ -422,7 +424,7 @@ describe("properties", function () {
     expect(wpt.getElementsByTagName("name")[0].textContent).to.equal("name");
   });
 
-  it('Description', function() {
+  it('Description', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -434,7 +436,7 @@ describe("properties", function () {
         },
         geometry: {
           type: "Point",
-          coordinates: [0.0,0.0]
+          coordinates: [0.0, 0.0]
         }
       }]
     };
@@ -445,7 +447,30 @@ describe("properties", function () {
     expect(wpt.getElementsByTagName("desc")[0].textContent).to.equal("p1=foo\np2=bar");
   });
 
-  it('Description (from tags)', function() {
+  it('Description (from desc)', function () {
+    var geojson, result;
+    geojson = {
+      type: "FeatureCollection",
+      features: [{
+        type: "Feature",
+        properties: {
+          desc: "foo",
+          p2: "bar"
+        },
+        geometry: {
+          type: "Point",
+          coordinates: [0.0, 0.0]
+        }
+      }]
+    };
+    result = togpx(geojson);
+    result = (new DOMParser()).parseFromString(result, 'text/xml');
+    var wpt = result.getElementsByTagName("wpt")[0];
+    expect(wpt.getElementsByTagName("desc")).to.have.length(1);
+    expect(wpt.getElementsByTagName("desc")[0].textContent).to.equal("foo");
+  });
+
+  it('Description (from tags)', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -456,7 +481,7 @@ describe("properties", function () {
         },
         geometry: {
           type: "Point",
-          coordinates: [0.0,0.0]
+          coordinates: [0.0, 0.0]
         }
       }]
     };
@@ -467,8 +492,51 @@ describe("properties", function () {
     expect(wpt.getElementsByTagName("desc")[0].textContent).to.equal("name=name");
   });
 
+  it('Type', function () {
+    var geojson, result;
+    geojson = {
+      type: "FeatureCollection",
+      features: [{
+        type: "Feature",
+        properties: {
+          type: "my category"
+        },
+        geometry: {
+          type: "Point",
+          coordinates: [0.0, 0.0]
+        }
+      }]
+    };
+    result = togpx(geojson);
+    result = (new DOMParser()).parseFromString(result, 'text/xml');
+    var wpt = result.getElementsByTagName("wpt")[0];
+    expect(wpt.getElementsByTagName("type")).to.have.length(1);
+    expect(wpt.getElementsByTagName("type")[0].textContent).to.equal("my category");
+  });
 
-  it('Time', function() {
+  it('Type (undefined)', function () {
+    var geojson, result;
+    geojson = {
+      type: "FeatureCollection",
+      features: [{
+        type: "Feature",
+        properties: {
+          p1: "foo"
+        },
+        geometry: {
+          type: "Point",
+          coordinates: [0.0, 0.0]
+        }
+      }]
+    };
+    result = togpx(geojson);
+    result = (new DOMParser()).parseFromString(result, 'text/xml');
+    var wpt = result.getElementsByTagName("wpt")[0];
+    expect(wpt.getElementsByTagName("type")).to.have.length(0);
+  });
+
+
+  it('Time', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -482,7 +550,7 @@ describe("properties", function () {
         },
         geometry: {
           type: "LineString",
-          coordinates: [[1.0,2.0],[3.0,4.0]]
+          coordinates: [[1.0, 2.0], [3.0, 4.0]]
         }
       }]
     };
@@ -495,7 +563,7 @@ describe("properties", function () {
     expect(pts[1].getElementsByTagName("time")[0].textContent).to.equal("2014-06-23T20:29:11Z");
   });
 
-  it('Time (custom)', function() {
+  it('Time (custom)', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -503,16 +571,18 @@ describe("properties", function () {
         type: "Feature",
         geometry: {
           type: "LineString",
-          coordinates: [[1.0,2.0],[3.0,4.0]]
+          coordinates: [[1.0, 2.0], [3.0, 4.0]]
         }
       }]
     };
-    result = togpx(geojson, {featureCoordTimes: function(feature) {
-      return [
-        "2014-06-23T20:29:08Z",
-        "2014-06-23T20:29:11Z",
-      ];
-    }});
+    result = togpx(geojson, {
+      featureCoordTimes: function (feature) {
+        return [
+          "2014-06-23T20:29:08Z",
+          "2014-06-23T20:29:11Z",
+        ];
+      }
+    });
     result = (new DOMParser()).parseFromString(result, 'text/xml');
     var pts = result.getElementsByTagName("trkpt");
     expect(pts[0].getElementsByTagName("time")).to.have.length(1);
@@ -521,7 +591,7 @@ describe("properties", function () {
     expect(pts[1].getElementsByTagName("time")[0].textContent).to.equal("2014-06-23T20:29:11Z");
   });
 
-  it('Time (string)', function() {
+  it('Time (string)', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -535,7 +605,7 @@ describe("properties", function () {
         },
         geometry: {
           type: "LineString",
-          coordinates: [[1.0,2.0],[3.0,4.0]]
+          coordinates: [[1.0, 2.0], [3.0, 4.0]]
         }
       }]
     };
@@ -553,7 +623,7 @@ describe("properties", function () {
 
 describe("elevation", function () {
 
-  it('point', function() {
+  it('point', function () {
     var geojson, result, wpt;
     geojson = {
       type: "FeatureCollection",
@@ -562,7 +632,7 @@ describe("elevation", function () {
         properties: {},
         geometry: {
           type: "Point",
-          coordinates: [0.0,0.0, 1.23]
+          coordinates: [0.0, 0.0, 1.23]
         }
       }]
     };
@@ -572,7 +642,7 @@ describe("elevation", function () {
     expect(wpt.getElementsByTagName("ele")).to.have.length(1);
     expect(wpt.getElementsByTagName("ele")[0].textContent).to.equal("1.23");
   });
-  it('point (zero value)', function() {
+  it('point (zero value)', function () {
     var geojson, result, wpt;
     geojson = {
       type: "FeatureCollection",
@@ -581,7 +651,7 @@ describe("elevation", function () {
         properties: {},
         geometry: {
           type: "Point",
-          coordinates: [0.0,0.0, 0]
+          coordinates: [0.0, 0.0, 0]
         }
       }]
     };
@@ -591,7 +661,7 @@ describe("elevation", function () {
     expect(wpt.getElementsByTagName("ele")).to.have.length(1);
     expect(wpt.getElementsByTagName("ele")[0].textContent).to.equal("0");
   });
-  it('line', function() {
+  it('line', function () {
     var geojson, result, trk, trksegs, trkpts;
     geojson = {
       type: "FeatureCollection",
@@ -601,8 +671,8 @@ describe("elevation", function () {
         geometry: {
           type: "LineString",
           coordinates: [
-            [0.0,0.0, 1.23],
-            [1.0,1.0, 3.21]
+            [0.0, 0.0, 1.23],
+            [1.0, 1.0, 3.21]
           ]
         }
       }]
@@ -616,7 +686,7 @@ describe("elevation", function () {
     expect(trkpts[0].getElementsByTagName("ele")[0].textContent).to.equal("1.23");
     expect(trkpts[1].getElementsByTagName("ele")[0].textContent).to.equal("3.21");
   });
-  it('polygon', function() {
+  it('polygon', function () {
     var geojson, result, trk, trksegs, trkpts;
     geojson = {
       type: "FeatureCollection",
@@ -626,10 +696,10 @@ describe("elevation", function () {
         geometry: {
           type: "Polygon",
           coordinates: [[
-            [0.0,0.0, 1.23],
-            [0.0,1.0, 1.23],
-            [1.0,1.0, 1.23],
-            [0.0,0.0, 1.23]
+            [0.0, 0.0, 1.23],
+            [0.0, 1.0, 1.23],
+            [1.0, 1.0, 1.23],
+            [0.0, 0.0, 1.23]
           ]]
         }
       }]
@@ -647,14 +717,14 @@ describe("elevation", function () {
 
 describe("options", function () {
 
-  it('creator', function() {
+  it('creator', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
       features: []
     };
     // creator provided
-    result = togpx(geojson, {creator: "foo bar"});
+    result = togpx(geojson, { creator: "foo bar" });
     result = (new DOMParser()).parseFromString(result, 'text/xml');
     expect(result.firstChild.getAttribute("creator")).to.eql("foo bar");
     // default creator
@@ -662,26 +732,26 @@ describe("options", function () {
     result = (new DOMParser()).parseFromString(result, 'text/xml');
     expect(result.firstChild.getAttribute("creator")).to.be.a("string");
     // explicitely unset creator
-    result = togpx(geojson, {creator: false});
+    result = togpx(geojson, { creator: false });
     result = (new DOMParser()).parseFromString(result, 'text/xml');
     expect(result.firstChild.getAttribute("creator")).to.not.be.ok();
     expect("foo").to.be.undefined;
   });
 
-  it('metadata', function() {
+  it('metadata', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
       features: []
     };
-    result = togpx(geojson, {metadata: {foo:"bar"}});
+    result = togpx(geojson, { metadata: { foo: "bar" } });
     result = (new DOMParser()).parseFromString(result, 'text/xml');
     var metadata = result.firstChild.getElementsByTagName("metadata");
     expect(metadata).to.have.length(1);
     expect(metadata[0].getElementsByTagName("foo")[0].textContent).to.equal("bar");
   });
 
-  it('featureTitle', function() {
+  it('featureTitle', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -690,20 +760,22 @@ describe("options", function () {
         properties: {},
         geometry: {
           type: "Point",
-          coordinates: [0.0,0.0]
+          coordinates: [0.0, 0.0]
         }
       }]
     };
-    result = togpx(geojson, {featureTitle: function(props) {
-      return "featureTitle";
-    }});
+    result = togpx(geojson, {
+      featureTitle: function (props) {
+        return "featureTitle";
+      }
+    });
     result = (new DOMParser()).parseFromString(result, 'text/xml');
     var wpt = result.getElementsByTagName("wpt")[0];
     expect(wpt.getElementsByTagName("name")).to.have.length(1);
     expect(wpt.getElementsByTagName("name")[0].textContent).to.equal("featureTitle");
   });
 
-  it('featureDescription', function() {
+  it('featureDescription', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -712,20 +784,22 @@ describe("options", function () {
         properties: {},
         geometry: {
           type: "Point",
-          coordinates: [0.0,0.0]
+          coordinates: [0.0, 0.0]
         }
       }]
     };
-    result = togpx(geojson, {featureDescription: function(props) {
-      return "featureDescription";
-    }});
+    result = togpx(geojson, {
+      featureDescription: function (props) {
+        return "featureDescription";
+      }
+    });
     result = (new DOMParser()).parseFromString(result, 'text/xml');
     var wpt = result.getElementsByTagName("wpt")[0];
     expect(wpt.getElementsByTagName("desc")).to.have.length(1);
     expect(wpt.getElementsByTagName("desc")[0].textContent).to.equal("featureDescription");
   });
 
-  it('featureLink', function() {
+  it('featureLink', function () {
     var geojson, result;
     geojson = {
       type: "FeatureCollection",
@@ -734,13 +808,15 @@ describe("options", function () {
         properties: {},
         geometry: {
           type: "Point",
-          coordinates: [0.0,0.0]
+          coordinates: [0.0, 0.0]
         }
       }]
     };
-    result = togpx(geojson, {featureLink: function(props) {
-      return "http://example.com";
-    }});
+    result = togpx(geojson, {
+      featureLink: function (props) {
+        return "http://example.com";
+      }
+    });
     result = (new DOMParser()).parseFromString(result, 'text/xml');
     var wpt = result.getElementsByTagName("wpt")[0];
     expect(wpt.getElementsByTagName("link")).to.have.length(1);
